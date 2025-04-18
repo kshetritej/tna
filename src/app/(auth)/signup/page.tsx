@@ -5,16 +5,17 @@ import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import axios from "axios"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { useMutation } from "@tanstack/react-query"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
-  isDoctor: z.boolean().default(false),
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -26,23 +27,29 @@ export default function SignupPage() {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    watch,
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
-      isDoctor: false,
     },
   })
 
-  // We need to watch the checkbox value since it's not directly bound with register
-  const isDoctor = watch("isDoctor")
+  const signup = useMutation({
+    mutationFn: async (data: FormValues) => await axios.post("/api/signup", {
+      ...data,
+    }),
+    mutationKey: ["signup"],
+    onSuccess: () => {
+      setIsLoading(false)
+      console.log("singup success")
+    },
+  })
 
   const onSubmit = (data: FormValues) => {
     setIsLoading(true)
+    signup.mutate(data)
     // Simulate API call
     console.log(data)
     setTimeout(() => {
