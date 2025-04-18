@@ -17,8 +17,21 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
+  password String
+
   name  String?
+  title String?
+  qualification String?
+  experience Int?
+
+  address String?
+  phone String?
+
+  isDoctor Boolean @default(false)
+  isVerified Boolean @default(false)
+
   posts Post[]
+  comments Comment[]
 }
 
 model Post {
@@ -28,4 +41,14 @@ model Post {
   published Boolean @default(false)
   authorId  Int
   author    User    @relation(fields: [authorId], references: [id])
+  comments Comment[]
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  content String
+  authorId Int
+  author User @relation(fields: [authorId], references: [id])
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
 }

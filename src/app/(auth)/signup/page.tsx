@@ -9,7 +9,6 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -53,8 +52,8 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="container flex py-16 items-center justify-center">
-      <Card className="w-full max-w-md">
+    <div className="container mx-auto flex py-16 items-center justify-center">
+      <Card className="w-full min-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">Create an account</CardTitle>
           <CardDescription>Enter your information to create an account</CardDescription>
@@ -112,34 +111,22 @@ export default function SignupPage() {
               {errors.password && <p className="text-sm font-medium text-destructive">{errors.password.message}</p>}
             </div>
 
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="isDoctor"
-                checked={isDoctor}
-                onCheckedChange={(checked) => {
-                  setValue("isDoctor", checked === true)
-                }}
-              />
-              <label
-                htmlFor="isDoctor"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-              >
-                I am a healthcare professional
-              </label>
-            </div>
-
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? "Creating account..." : "Sign up"}
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-center">
+        <CardFooter className="flex flex-col justify-center">
           <p className="text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link href="/login" className="text-primary hover:underline">
               Login
             </Link>
           </p>
+          <p className="text-sm">or</p>
+          <Link href="/register-doctor" className="text-sm text-primary hover:underline">
+            Signup as a doctor
+          </Link>
         </CardFooter>
       </Card>
     </div>
