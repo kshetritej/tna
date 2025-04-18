@@ -9,6 +9,9 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { useMutation } from "@tanstack/react-query"
+import axios from "axios"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -32,14 +35,17 @@ export default function LoginPage() {
     },
   })
 
+  const login = useMutation({
+    mutationFn: async (data:FormValues) => await axios.post("/api/login", data),
+    mutationKey: ["login"],
+    onSuccess: (data) => {
+      setIsLoading(false)
+      toast.success("Login successful!")
+    },
+  })
   const onSubmit = (data: FormValues) => {
     setIsLoading(true)
-    // Simulate API call
-    console.log(data)
-    setTimeout(() => {
-      setIsLoading(false)
-      // Here you would typically redirect the user or show a success message
-    }, 1000)
+    login.mutate(data)
   }
 
   return (

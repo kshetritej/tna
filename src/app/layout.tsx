@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react"
+import { Toaster } from "@/components/ui/sonner"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { Navbar } from "@/components/layout/navbar"
@@ -28,6 +29,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="mx-auto">{children}</main>
+            <Toaster/>
             <Footer />
           </div>
         </ThemeProvider>
