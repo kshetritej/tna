@@ -25,22 +25,28 @@ model User {
 
   address String?
   phone String?
+  avatar String?
 
   isDoctor Boolean @default(false)
   isVerified Boolean @default(false)
 
   posts Post[]
   comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }
 
 model Post {
   id        Int     @id @default(autoincrement())
   title     String
   content   String?
-  published Boolean @default(false)
   authorId  Int
   author    User    @relation(fields: [authorId], references: [id])
   comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }
 
 model Comment {
@@ -50,4 +56,7 @@ model Comment {
   author User @relation(fields: [authorId], references: [id])
   postId Int
   post Post @relation(fields: [postId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }

@@ -1,11 +1,13 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { ChevronDown } from "lucide-react"
 import { ModeToggle } from "../mode-toggle"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
 export function Navbar() {
+  const user = {
+    name: "John Doe",
+    avatar: "https://github.com/shadcn.png",
+  }
   return (
     <header className="border-b bg-background">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -31,6 +33,8 @@ export function Navbar() {
           </Button>
         </nav>
 
+
+        {!user ? (
         <div className="flex items-center gap-3">
           <ModeToggle />
           <Button variant="ghost" size="sm" asChild>
@@ -39,7 +43,19 @@ export function Navbar() {
           <Button size="sm" asChild>
             <Link href="/signup">Sign up</Link>
           </Button>
-        </div>
+          </div>)
+          :
+          <div className="flex items-center gap-3">
+          <ModeToggle />
+            <Avatar>
+              <AvatarImage src={user?.avatar} />
+              <AvatarFallback>
+                {user?.name?.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+
+        }
       </div>
     </header>
   )

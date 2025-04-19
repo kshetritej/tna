@@ -39,6 +39,7 @@ export default function LoginPage() {
     mutationFn: async (data:FormValues) => await axios.post("/api/login", data),
     mutationKey: ["login"],
     onSuccess: (data) => {
+      localStorage.setItem("token", data.data.token)
       setIsLoading(false)
       toast.success("Login successful!")
     },
