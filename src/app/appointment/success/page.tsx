@@ -28,7 +28,7 @@ export default function AppointmentSuccessPage() {
         </CardContent>
         <CardFooter className="flex justify-center gap-4">
           <Button variant="outline" asChild>
-            <Link href="/appointments">View My Appointments</Link>
+            <Link href="/profile">View My Appointments</Link>
           </Button>
           <Button asChild>
             <Link href="/">Return to Home</Link>

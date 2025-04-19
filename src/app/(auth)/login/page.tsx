@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -22,7 +23,7 @@ type FormValues = z.infer<typeof formSchema>
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
-
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -42,7 +43,13 @@ export default function LoginPage() {
       localStorage.setItem("token", data.data.token)
       setIsLoading(false)
       toast.success("Login successful!")
+      router.push("/profile")
+      router.refresh()
     },
+    onError: (error) => {
+      setIsLoading(false)
+      toast.error("Login failed!")
+    }
   })
   const onSubmit = (data: FormValues) => {
     setIsLoading(true)

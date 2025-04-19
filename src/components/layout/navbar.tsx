@@ -6,8 +6,11 @@ import { ModeToggle } from "../mode-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner";
 export function Navbar() {
   const [user, setUser] = useState<any>(null)
+  const router = useRouter()
 
   useEffect(() => {
     const token = localStorage?.getItem("token")
@@ -15,12 +18,12 @@ export function Navbar() {
     setUser(user)
   }, [])
 
+
   return (
     <header className="border-b bg-background">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <div className="bg-primary rounded-md w-8 h-8 flex items-center justify-center">
-            {/* <Image src="/placeholder.svg?height=24&width=24" width={24} height={24} alt="Logo" className="invert" /> */}
           </div>
           <span className="font-bold text-2xl">tna</span>
         </Link>
@@ -54,12 +57,14 @@ export function Navbar() {
           :
           <div className="flex items-center gap-3">
           <ModeToggle />
+          <Link href="/profile">
             <Avatar>
               <AvatarImage src={user?.avatar} />
               <AvatarFallback>
                 {user?.name?.charAt(0)}
               </AvatarFallback>
             </Avatar>
+          </Link>
           </div>
 
         }

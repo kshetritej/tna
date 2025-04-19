@@ -22,3 +22,14 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({ message: "Appointment created", appointment: newAppointment }, { status: 201 });
 }
+
+export async function PATCH(request: NextRequest) {
+  const body = await request.json();
+  const { id, status } = body;
+  const updatedAppointment = await prisma.appointment.update({
+    where: { id: parseInt(id) },
+    data: { status },
+  });
+
+  return NextResponse.json({ message: "Appointment updated", appointment: updatedAppointment }, { status: 200 });
+}
