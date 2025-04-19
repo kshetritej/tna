@@ -131,7 +131,7 @@ export default function SignupPage() {
             </Link>
           </p>
           <p className="text-sm">or</p>
-          <Link href="/register-doctor" className="text-sm text-primary hover:underline">
+          <Link href="/signup/doctor" className="text-sm text-primary hover:underline">
             Signup as a doctor
           </Link>
         </CardFooter>

@@ -40,7 +40,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="container min-w-3xl  py-8 px-4 mx-auto">
+    <div className="container min-w-3xl max-w-3xl  py-8 px-4 mx-auto">
       <div className="flex flex-col gap-6  mx-auto">
         <div>
           <Button variant="ghost" size="sm" asChild className="mb-4">

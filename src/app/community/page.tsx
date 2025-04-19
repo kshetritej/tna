@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MessageSquare, User } from "lucide-react"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import { jwtDecode } from "jwt-decode"
 
 
 
@@ -18,7 +19,8 @@ export default function CommunityPage() {
     queryFn: () => axios.get("/api/post").then((res) => res.data),
   })
 
-  console.log("POSTS", posts)
+  const user = jwtDecode(localStorage.getItem("token") || "")
+
   return (
     <div className="container py-8 px-4 mx-auto">
       <div className="flex flex-col gap-6">
@@ -27,9 +29,11 @@ export default function CommunityPage() {
             <h1 className="text-3xl font-bold mb-2">Community Forum</h1>
             <p className="text-muted-foreground">Connect with peers, share experiences, and find support</p>
           </div>
-          <Button asChild>
-            <Link href="/community/create">Create Post</Link>
-          </Button>
+          {user && (
+            <Button asChild>
+              <Link href="/community/create">Create Post</Link>
+            </Button>
+          )}
         </div>
 
         <div className="grid gap-4">

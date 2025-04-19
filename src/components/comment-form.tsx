@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -14,8 +13,6 @@ import { jwtDecode } from "jwt-decode"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "sonner"
-import { Ruthie } from "next/font/google"
-import { requestFormReset } from "react-dom"
 
 const formSchema = z.object({
   content: z.string().min(1, { message: "Comment cannot be empty" }).max(1000, {
@@ -33,7 +30,9 @@ interface CommentFormProps {
 export function CommentForm({ postId }: CommentFormProps) {
   const router = useRouter()
 
-  const user = jwtDecode(localStorage.getItem("token") as string)
+  const token = localStorage?.getItem("token")
+  const user = token ? jwtDecode(token as string) : null
+
   const {
     register,
     handleSubmit,
@@ -88,8 +87,8 @@ export function CommentForm({ postId }: CommentFormProps) {
           </div>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button type="submit" disabled={postComment.isPending}>
-            {postComment.isPending ? "Submitting..." : "Post Comment"}
+          <Button type="submit" disabled={postComment.isPending || !user}>
+            {postComment.isPending ? "Submitting..." : !user ? "Login to Comment" : "Post Comment"}
           </Button>
         </CardFooter>
       </Card>

@@ -1,11 +1,12 @@
-import { Star, MapPin, Clock, Users } from "lucide-react"
+"use client";
+
+import { MapPin, Clock, Phone, CheckCircle, Verified } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
   Pagination,
   PaginationContent,
@@ -14,72 +15,21 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
 
-// Mock data for doctors
-const doctors = [
-  {
-    id: 1,
-    name: "Dr. Sarah Johnson",
-    specialty: "Psychiatry Specialist",
-    location: "New York, USA",
-    experience: "8 Years",
-    patients: "1240+",
-    rating: 4.8,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 2,
-    name: "Dr. Michael Chen",
-    specialty: "Psychology Specialist",
-    location: "Boston, USA",
-    experience: "6 Years",
-    patients: "980+",
-    rating: 4.7,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 3,
-    name: "Dr. Emily Rodriguez",
-    specialty: "Therapy Specialist",
-    location: "Chicago, USA",
-    experience: "5 Years",
-    patients: "870+",
-    rating: 4.6,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 4,
-    name: "Dr. James Wilson",
-    specialty: "Psychiatry Specialist",
-    location: "Los Angeles, USA",
-    experience: "12 Years",
-    patients: "1560+",
-    rating: 4.9,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 5,
-    name: "Dr. Aisha Patel",
-    specialty: "Counseling Specialist",
-    location: "Seattle, USA",
-    experience: "7 Years",
-    patients: "1120+",
-    rating: 4.8,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 6,
-    name: "Dr. Robert Kim",
-    specialty: "Psychology Specialist",
-    location: "Austin, USA",
-    experience: "4 Years",
-    patients: "780+",
-    rating: 4.5,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-]
 
 export default function DoctorsPage() {
+  const { data: doctors, isLoading } = useQuery({
+    queryKey: ["doctors"],
+    queryFn: async () => {
+      const response = await axios.get("/api/doctors")
+      return response.data
+    },
+  })
+
+  console.log("DOCTORS", doctors)
+  if (isLoading) return <div>Loading...</div>
   return (
     <div className="container py-8 px-4 mx-auto">
       <div className="flex flex-col gap-6">
@@ -94,20 +44,6 @@ export default function DoctorsPage() {
         <div className="flex flex-col md:flex-row gap-4">
           <div className="relative flex-1">
             <Input placeholder="Search by name, specialty, or location..." className="pl-4" />
-          </div>
-          <div className="flex gap-2">
-            <Select defaultValue="specialty">
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Specialty" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Specialties</SelectItem>
-                <SelectItem value="psychiatrist">Psychiatrist</SelectItem>
-                <SelectItem value="psychologist">Psychologist</SelectItem>
-                <SelectItem value="therapist">Therapist</SelectItem>
-                <SelectItem value="counselor">Counselor</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
         </div>
 
@@ -126,7 +62,7 @@ export default function DoctorsPage() {
                   <div className="relative w-full mb-3">
                     <div className="aspect-square w-32 h-32 mx-auto rounded-md overflow-hidden">
                       <Image
-                        src={doctor.image || "/placeholder.svg"}
+                        src={doctor.avatar || "/placeholder.svg"}
                         alt={doctor.name}
                         width={128}
                         height={128}
@@ -137,14 +73,15 @@ export default function DoctorsPage() {
 
                   {/* Doctor Info */}
                   <div className="text-center mb-3">
-                    <h3 className="font-bold text-lg">{doctor.name}</h3>
-                    <p className="text-muted-foreground text-sm">{doctor.specialty}</p>
+                    <h3 className="flex items-center justify-center font-bold text-lg">{doctor.name} {doctor.isVerified && <Verified className="h-4 w-4 fill-green-600 text-lime-100 ml-2" />}</h3>
+                    <p className="text-muted-foreground text-sm">{doctor.title}</p>
+                    <p className="text-muted-foreground text-sm">{doctor.qualification}</p>
                   </div>
 
                   {/* Location */}
                   <div className="flex items-center justify-center text-sm text-muted-foreground mb-4">
                     <MapPin className="h-4 w-4 mr-1" />
-                    <span>{doctor.location}</span>
+                    <span>{doctor.address}</span>
                   </div>
 
                   {/* Stats */}
@@ -153,14 +90,14 @@ export default function DoctorsPage() {
                       <Clock className="h-4 w-4 text-green-600 mr-2" />
                       <div>
                         <p className="text-sm font-medium">Experience</p>
-                        <p className="text-sm">{doctor.experience}</p>
+                        <p className="text-sm">{doctor.experience}+ years</p>
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <Users className="h-4 w-4 text-green-600 mr-2" />
+                      <Phone className="h-4 w-4 text-green-600 mr-2" />
                       <div>
-                        <p className="text-sm font-medium">Patients</p>
-                        <p className="text-sm">{doctor.patients}</p>
+                        <p className="text-sm font-medium">Quick Contact</p>
+                        <p className="text-sm">{doctor.phone}</p>
                       </div>
                     </div>
                   </div>

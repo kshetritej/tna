@@ -1,13 +1,15 @@
+"use client";
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "../mode-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { jwtDecode } from "jwt-decode"
 
 export function Navbar() {
-  const user = {
-    name: "John Doe",
-    avatar: "https://github.com/shadcn.png",
-  }
+  const token = localStorage?.getItem("token")
+  const user = token ? jwtDecode(token as string) : null
+
   return (
     <header className="border-b bg-background">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
