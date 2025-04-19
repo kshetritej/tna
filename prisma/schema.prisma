@@ -13,6 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
@@ -32,6 +38,8 @@ model User {
 
   posts Post[]
   comments Comment[]
+  patientAppointments Appointment[] @relation("PatientAppointments")
+  doctorAppointments Appointment[] @relation("DoctorAppointments")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
@@ -56,6 +64,24 @@ model Comment {
   author User @relation(fields: [authorId], references: [id])
   postId Int
   post Post @relation(fields: [postId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Appointment {
+  id Int @id @default(autoincrement())
+  subject String
+  description String?
+  durationInMinutes Int
+  start DateTime
+  status AppointmentStatus @default(PENDING)
+  contact String?
+
+  patientId Int
+  patient User @relation("PatientAppointments", fields: [patientId], references: [id])
+  doctorId Int
+  doctor User @relation("DoctorAppointments", fields: [doctorId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())

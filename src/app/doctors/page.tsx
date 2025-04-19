@@ -108,7 +108,7 @@ export default function DoctorsPage() {
                   <Link href={`/doctors/${doctor.id}`}>View Profile</Link>
                 </Button>
                 <Button className="flex-1" asChild>
-                  <Link href={`/appointments/book?doctor=${doctor.id}`}>Book Session</Link>
+                   <Link href={`/appointment?doctor=${doctor.id}`}>Book Session</Link>
                 </Button>
               </CardFooter>
             </Card>

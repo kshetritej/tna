@@ -5,10 +5,15 @@ import { Button } from "@/components/ui/button"
 import { ModeToggle } from "../mode-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { jwtDecode } from "jwt-decode"
-
+import { useEffect, useState } from "react"
 export function Navbar() {
-  const token = localStorage?.getItem("token")
-  const user = token ? jwtDecode(token as string) : null
+  const [user, setUser] = useState<any>(null)
+
+  useEffect(() => {
+    const token = localStorage?.getItem("token")
+    const user = token ? jwtDecode(token as string) : null
+    setUser(user)
+  }, [])
 
   return (
     <header className="border-b bg-background">
