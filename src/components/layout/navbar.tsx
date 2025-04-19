@@ -6,16 +6,22 @@ import { ModeToggle } from "../mode-toggle"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { jwtDecode } from "jwt-decode"
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner";
+
+interface User {
+  id: number
+  name: string
+  email: string
+  avatar: string
+}
+
 export function Navbar() {
-  const [user, setUser] = useState<any>(null)
-  const router = useRouter()
+  const [user, setUser] = useState<User | null>(null)
+
 
   useEffect(() => {
     const token = localStorage?.getItem("token")
     const user = token ? jwtDecode(token as string) : null
-    setUser(user)
+    setUser(user as User)
   }, [])
 
 

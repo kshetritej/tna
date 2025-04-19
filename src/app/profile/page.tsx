@@ -4,14 +4,13 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 import { jwtDecode } from "jwt-decode"
 import { format } from "date-fns"
-import { Check, X, Phone, Mail, MapPin, Clock, Calendar, FileText, CheckCircle, XCircle } from "lucide-react"
+import { Check, X, Phone, Mail, MapPin, Clock, Calendar, FileText } from "lucide-react"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 
 interface UserToken {
   id: number
@@ -22,7 +21,6 @@ interface UserToken {
 export default function ProfilePage() {
   const token = localStorage?.getItem("token") || ""
   const user = token ? (jwtDecode(token) as UserToken) : null
-  const router = useRouter()
 
   const { data: profile, isLoading } = useQuery({
     queryKey: ["profile"],
@@ -203,7 +201,7 @@ export default function ProfilePage() {
                 <CardContent className="flex flex-col items-center justify-center text-center">
                   <Calendar className="h-12 w-12 text-muted-foreground mb-4" />
                   <h3 className="text-lg font-semibold mb-2">No Appointments</h3>
-                  <p className="text-muted-foreground">You don't have any appointments scheduled.</p>
+                  <p className="text-muted-foreground">You don&apos;t have any appointments scheduled.</p>
                 </CardContent>
               </Card>
             )}

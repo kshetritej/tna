@@ -309,7 +309,7 @@ export default function DoctorSignupPage() {
                       <h3 className="text-sm font-medium">Verification Required</h3>
                       <p className="text-xs text-foreground">
                         After registration, our team will verify your credentials before your profile is activated.
-                        You'll receive an email once your account is verified.
+                        You&apos;ll receive an email once your account is verified.
                       </p>
                     </div>
                   </div>

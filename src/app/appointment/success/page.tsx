@@ -18,7 +18,7 @@ export default function AppointmentSuccessPage() {
         <CardContent>
           <div className="space-y-4">
             <p>
-              We've sent a confirmation email with all the details of your appointment. You can also view your upcoming
+              We&apos;ve sent a confirmation email with all the details of your appointment. You can also view your upcoming
               appointments in your dashboard.
             </p>
             <p className="text-sm text-muted-foreground">

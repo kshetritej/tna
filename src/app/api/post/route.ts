@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
   return NextResponse.json(post)
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const posts = await prisma.post.findMany({
     include: {
       author: true,

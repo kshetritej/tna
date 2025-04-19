@@ -270,12 +270,12 @@ export default function ResourcesPage() {
             <div>
               <h2 className="text-xl font-semibold mb-2">Suicidal Thoughts?</h2>
               <p className="mb-4">
-                If you're thinking about suicide or experiencing a mental health crisis, please call the National
+                If you&apos;re thinking about suicide or experiencing a mental health crisis, please call the National
                 Suicide Prevention Lifeline immediately at <strong className="text-foreground">1-800-273-8255</strong>{" "}
                 or text HOME to <strong className="text-foreground">741741</strong> to reach the Crisis Text Line.
               </p>
               <p className="text-muted-foreground">
-                These services are free, confidential, and available 24/7. You don't have to face depression alone.
+                These services are free, confidential, and available 24/7. You don&apos;t have to face depression alone.
               </p>
             </div>
           </div>

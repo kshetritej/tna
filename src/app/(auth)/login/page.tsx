@@ -47,6 +47,7 @@ export default function LoginPage() {
       router.refresh()
     },
     onError: (error) => {
+      console.log("ERROR", error)
       setIsLoading(false)
       toast.error("Login failed!")
     }
