@@ -4,7 +4,12 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest, { params }: { params: { doctorId: string } }) {
   const { doctorId } = await params
   const appointment = await prisma.appointment.findMany({
-    where: { doctorId: parseInt(doctorId) },
+    where: {
+      OR: [
+        { doctorId: parseInt(doctorId) },
+        { patientId: parseInt(doctorId) }
+      ]
+    },
     include: {
       patient: {
         select: {
@@ -23,6 +28,9 @@ export async function GET(request: NextRequest, { params }: { params: { doctorId
         },
       },
     },
+    orderBy:{
+      start: 'desc'
+    }
   })
   return NextResponse.json(appointment)
 }

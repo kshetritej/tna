@@ -48,8 +48,7 @@ export default function ProfilePage() {
   const handleLogout = () => {
     localStorage.removeItem("token")
     toast.success("Logged out successfully")
-    router.push("/")
-    router.refresh()
+    window.location.href = "/"
   }
 
   if (!user) {
@@ -131,56 +130,70 @@ export default function ProfilePage() {
             {appointments?.map((appointment: any) => (
               <Card key={appointment.id}>
                 <CardContent className="pt-6">
-                  <div className="flex items-center justify-between">
-                    <div className="grid gap-1">
-                      <div className="font-semibold">{appointment.subject}</div>
-                      <div className="text-sm text-muted-foreground">{appointment.description}</div>
-                      <div className="flex items-center gap-4 mt-2">
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <Calendar className="h-4 w-4" />
-                          <span>{format(new Date(appointment.start), 'MMM dd, yyyy')}</span>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center justify-between">
+                      <div className="grid gap-1">
+                        <div className="font-semibold">{appointment.subject}</div>
+                        <div className="text-sm text-muted-foreground">{appointment.description}</div>
+                        <div className="flex items-center gap-4 mt-2">
+                          <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <Calendar className="h-4 w-4" />
+                            <span>{format(new Date(appointment.start), 'MMM dd, yyyy')}</span>
+                          </div>
+                          <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <Clock className="h-4 w-4" />
+                            <span>{format(new Date(appointment.start), 'hh:mm a')}</span>
+                          </div>
+                          <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <FileText className="h-4 w-4" />
+                            <span>{appointment.durationInMinutes} minutes</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <Clock className="h-4 w-4" />
-                          <span>{format(new Date(appointment.start), 'hh:mm a')}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <FileText className="h-4 w-4" />
-                          <span>{appointment.durationInMinutes} minutes</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2 mt-2">
-                        <Badge variant={
-                          appointment.status === 'CONFIRMED' ? 'default' :
+                        <div className="flex items-center gap-2 mt-2">
+                          <Badge variant={
+                            appointment.status === 'CONFIRMED' ? 'default' :
                             appointment.status === 'CANCELLED' ? 'destructive' :
-                              'secondary'
-                        }>
-                          {appointment.status}
-                        </Badge>
+                                'secondary'
+                          }>
+                            {appointment.status}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          {appointment.doctorId === user.id ? (
+                            <span className="text-muted-foreground">
+                              Patient: <span className="font-medium text-foreground">{appointment.patient.name}</span>
+                            </span>
+                          ) : (
+                            <span className="text-muted-foreground">
+                              Doctor: <span className="font-medium text-foreground">{appointment.doctor.name}</span>
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    {appointment.status === 'PENDING' && (
-                      <div className="flex gap-2">
-                        {appointment.doctor.isDoctor &&
+
+                      {appointment.status === 'PENDING' && (
+                        <div className="flex gap-2">
+                          {appointment.doctorId === user.id && (
+                            <Button
+                              size="icon"
+                              variant="outline"
+                              className="h-8 w-8 text-green-500 hover:text-green-600"
+                              onClick={() => handleAppointmentAction(appointment.id, 'confirm')}
+                            >
+                              <Check className="h-4 w-4" />
+                            </Button>
+                          )}
                           <Button
                             size="icon"
                             variant="outline"
-                            className="h-8 w-8 text-green-500 hover:text-green-600"
-                            onClick={() => handleAppointmentAction(appointment.id, 'confirm')}
+                            className="h-8 w-8 text-destructive hover:text-destructive/80"
+                            onClick={() => handleAppointmentAction(appointment.id, 'cancel')}
                           >
-                            <Check className="h-4 w-4" />
+                            <X className="h-4 w-4" />
                           </Button>
-                        }
-                        <Button
-                          size="icon"
-                          variant="outline"
-                          className="h-8 w-8 text-destructive hover:text-destructive/80"
-                          onClick={() => handleAppointmentAction(appointment.id, 'cancel')}
-                        >
-                          <X className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
