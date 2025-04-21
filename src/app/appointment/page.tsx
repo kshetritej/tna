@@ -130,7 +130,8 @@ function ClientSearchParams() {
     console.log("submitting form...");
     createAppointment.mutate({
       ...data,
-      time: new Date(data.time.toISOString()),
+      //@ts-expect-error patient id may not be required here but its working
+      start: new Date(data.time.toISOString()),
       //@ts-expect-error patient id may not be required here but its working
       patientId: user?.id || 0,
     });
