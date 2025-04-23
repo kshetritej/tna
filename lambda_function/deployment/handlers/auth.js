@@ -9,10 +9,7 @@ exports.doctorSignup = doctorSignup;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const client_1 = require("@prisma/client");
-const aws_sdk_1 = require("aws-sdk");
 const prisma = new client_1.PrismaClient();
-const sns = new aws_sdk_1.SNS({ region: 'us-east-1' });
-const SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:376614585503:UserSignUps';
 async function login(event) {
     try {
         const { email, password } = JSON.parse(event.body || '{}');
@@ -54,20 +51,6 @@ async function signup(event) {
                 name
             }
         });
-        // Send SNS notification
-        await sns.publish({
-            TopicArn: SNS_TOPIC_ARN,
-            Message: JSON.stringify({
-                event: 'USER_SIGNUP',
-                user: {
-                    id: newUser.id,
-                    email: newUser.email,
-                    name: newUser.name,
-                    timestamp: new Date().toISOString()
-                }
-            }),
-            Subject: 'New User Registration'
-        }).promise();
         return {
             statusCode: 201,
             body: JSON.stringify({ message: "User created successfully", user: newUser })
@@ -106,22 +89,6 @@ async function doctorSignup(event) {
                 isDoctor: true,
             },
         });
-        // Send SNS notification for doctor signup
-        await sns.publish({
-            TopicArn: SNS_TOPIC_ARN,
-            Message: JSON.stringify({
-                event: 'DOCTOR_SIGNUP',
-                user: {
-                    id: user.id,
-                    email: user.email,
-                    name: user.name,
-                    title: user.title,
-                    qualification: user.qualification,
-                    timestamp: new Date().toISOString()
-                }
-            }),
-            Subject: 'New Doctor Registration'
-        }).promise();
         return {
             statusCode: 201,
             body: JSON.stringify(user)

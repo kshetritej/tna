@@ -5,7 +5,6 @@ exports.getPosts = getPosts;
 exports.getPost = getPost;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-
 async function createPost(event) {
     try {
         const { title, content, authorId } = JSON.parse(event.body || '{}');

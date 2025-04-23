@@ -2,11 +2,8 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
-import { SNS } from 'aws-sdk';
 
 const prisma = new PrismaClient();
-const sns = new SNS({ region: 'us-east-1' });
-const SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:376614585503:UserSignUps';
 
 export async function login(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
   try {
@@ -57,21 +54,6 @@ export async function signup(event: APIGatewayProxyEvent): Promise<APIGatewayPro
         name
       }
     });
-
-    // Send SNS notification
-    await sns.publish({
-      TopicArn: SNS_TOPIC_ARN,
-      Message: JSON.stringify({
-        event: 'USER_SIGNUP',
-        user: {
-          id: newUser.id,
-          email: newUser.email,
-          name: newUser.name,
-          timestamp: new Date().toISOString()
-        }
-      }),
-      Subject: 'New User Registration'
-    }).promise();
 
     return {
       statusCode: 201,
@@ -124,23 +106,6 @@ export async function doctorSignup(event: APIGatewayProxyEvent): Promise<APIGate
         isDoctor: true,
       },
     });
-
-    // Send SNS notification for doctor signup
-    await sns.publish({
-      TopicArn: SNS_TOPIC_ARN,
-      Message: JSON.stringify({
-        event: 'DOCTOR_SIGNUP',
-        user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          title: user.title,
-          qualification: user.qualification,
-          timestamp: new Date().toISOString()
-        }
-      }),
-      Subject: 'New Doctor Registration'
-    }).promise();
 
     return {
       statusCode: 201,

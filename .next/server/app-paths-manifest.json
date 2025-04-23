@@ -1,1 +1,4 @@
-{}
+{
+  "/community/page": "app/community/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
+}
