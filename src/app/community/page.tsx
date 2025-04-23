@@ -16,7 +16,7 @@ import { jwtDecode } from "jwt-decode"
 export default function CommunityPage() {
   const { data: posts, isLoading } = useQuery({
     queryKey: ["posts"],
-    queryFn: () => axios.get("/api/post").then((res) => res.data),
+    queryFn: () => axios.get("https://lambda.us-east-1.amazonaws.com/2015-03-31/functions/arn:aws:lambda:us-east-1:376614585503:function:myLambda/invocations").then((res) => res.data),
   })
 
   let user = null;

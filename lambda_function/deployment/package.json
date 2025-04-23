@@ -1,0 +1,24 @@
+{
+  "name": "mental-health-api-lambda",
+  "version": "1.0.0",
+  "description": "Lambda functions for mental health platform API",
+  "main": "index.js",
+  "dependencies": {
+    "@prisma/client": "^5.0.0",
+    "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "prisma": "^5.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prisma:generate": "prisma generate",
+    "prisma:deploy": "prisma migrate deploy"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^9.0.2",
+    "typescript": "^5.0.0"
+  }
+}
