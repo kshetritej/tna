@@ -28,7 +28,6 @@ export default function DoctorsPage() {
     },
   })
 
-  console.log("DOCTORS", doctors)
   if (isLoading) return <div>Loading...</div>
   return (
     <div className="container py-8 px-4 mx-auto">
@@ -104,9 +103,6 @@ export default function DoctorsPage() {
                 </div>
               </CardContent>
               <CardFooter className="p-4 pt-0 flex gap-2">
-                <Button variant="outline" className="flex-1" asChild>
-                  <Link href={`/doctors/${doctor.id}`}>View Profile</Link>
-                </Button>
                 <Button className="flex-1" asChild>
                    <Link href={`/appointment?doctor=${doctor.id}`}>Book Session</Link>
                 </Button>

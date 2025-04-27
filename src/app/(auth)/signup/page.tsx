@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useMutation } from "@tanstack/react-query"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -43,19 +44,18 @@ export default function SignupPage() {
     mutationKey: ["signup"],
     onSuccess: () => {
       setIsLoading(false)
-      console.log("singup success")
+      toast.success("Account created successfully. Sing in now!")
+      window.location.href = "/login"
+    },
+    onError: (err) => {
+      setIsLoading(false)
+      toast.error(err.message || "Failed to create account")
     },
   })
 
   const onSubmit = (data: FormValues) => {
     setIsLoading(true)
     signup.mutate(data)
-    // Simulate API call
-    console.log(data)
-    setTimeout(() => {
-      setIsLoading(false)
-      // Here you would typically redirect the user or show a success message
-    }, 1000)
   }
 
   return (

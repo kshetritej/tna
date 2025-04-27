@@ -1,4 +1,4 @@
-// File: /home/tj/Projects/mental/src/app/page.tsx
+// File: /home/tj/Documents/aws/mental/src/app/page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

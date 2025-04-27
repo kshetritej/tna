@@ -1,4 +1,4 @@
-// File: /home/tj/Projects/mental/src/app/api/appointment/[doctorId]/route.ts
+// File: /home/tj/Documents/aws/mental/src/app/api/appointment/[doctorId]/route.ts
 import * as entry from '../../../../../../src/app/api/appointment/[doctorId]/route.js'
 import type { NextRequest } from 'next/server.js'
 

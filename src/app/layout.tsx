@@ -22,17 +22,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html>
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="mx-auto">{children}</main>
-            <Toaster/>
-            <Footer />
-          </div>
-        </ThemeProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <main className="mx-auto">{children}</main>
+              <Toaster />
+              <Footer />
+            </div>
+          </ThemeProvider>
         </QueryClientProvider>
       </body>
     </html>

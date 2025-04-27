@@ -17,7 +17,7 @@ export default function CommunityPage() {
   const { data: posts, isLoading } = useQuery({
 
     queryKey: ["posts"],
-    queryFn: () => axios.get("https://2dp699o59j.execute-api.us-east-1.amazonaws.com/default/api/post").then((res) => res.data),
+    queryFn: () => axios.get("/api/post").then((res) => res.data),
   })
 
   let user = null;

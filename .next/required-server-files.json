@@ -102,7 +102,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/home/tj/Projects/mental",
+    "outputFileTracingRoot": "/home/tj/Documents/aws/mental",
     "experimental": {
       "nodeMiddleware": false,
       "cacheLife": {
@@ -285,10 +285,10 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
     "turbopack": {
-      "root": "/home/tj/Projects/mental"
+      "root": "/home/tj/Documents/aws/mental"
     }
   },
-  "appDir": "/home/tj/Projects/mental",
+  "appDir": "/home/tj/Documents/aws/mental",
   "relativeAppDir": "",
   "files": [
     ".next/routes-manifest.json",
