@@ -22,13 +22,18 @@ import {
 import { jwtDecode } from "jwt-decode"
 
 let user = null;
-if (localStorage.getItem("token")) {
-  user = jwtDecode(localStorage.getItem("token") || "")
+
+if (typeof window !== "undefined") {
+  if (localStorage.getItem("token")) {
+    user = jwtDecode(localStorage.getItem("token") || "")
+  }
 }
-console.log("user: ", user)
+
 const data = {
   user: {
+    // @ts-expect-error name might be undefined
     name: user?.name || "Admin",
+    // @ts-expect-error email might be undefined
     email: user?.email || "admin@gmail.com",
     avatar: "/avatars/shadcn.jpg",
   },

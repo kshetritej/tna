@@ -34,7 +34,6 @@ export default function AdminLoginPage() {
       return response.json()
     },
     onSuccess: (data) => {
-      console.log("login data", data)
       localStorage.setItem("token", data.token)
       toast.success("Login successful")
       router.push("/admin/dashboard")

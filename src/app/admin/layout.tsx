@@ -18,6 +18,7 @@ import { useEffect } from "react";
 
 interface JwtPayloadWithRole extends JwtPayload {
   role?: "SUPERADMIN" | "ADMIN" | "DOCTOR" | "PATIENT";
+  name?: string;
 }
 
 const queryClient = new QueryClient()
@@ -31,14 +32,16 @@ export default function RootLayout({
 }>) {
   const location = usePathname()
   let user: JwtPayloadWithRole | null = null;
-  const token = localStorage.getItem("token")
-  if (token) {
-    user = jwtDecode(token) as JwtPayloadWithRole
+
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token")
+    if (token) {
+      user = jwtDecode(token) as JwtPayloadWithRole
+    }
   }
 
   useEffect(() => {
     if (!user?.role || (user?.role !== "SUPERADMIN" && user?.role !== "ADMIN")) {
-      console.log("user role", user?.role)
       redirect("/")
     }
   }, [user])

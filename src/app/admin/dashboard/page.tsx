@@ -1,4 +1,3 @@
-import { AppSidebar } from "@/components/app-sidebar"
 import { SectionCards } from "@/components/section-cards"
 
 export default function Page() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingDownIcon, TrendingUpIcon } from "lucide-react"
+import {  TrendingUpIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Badge } from "@/components/ui/badge"

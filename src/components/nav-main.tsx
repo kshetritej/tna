@@ -1,6 +1,6 @@
 "use client"
 
-import { type LucideIcon, UserCog, UsersIcon } from "lucide-react"
+import { type LucideIcon, UserCog } from "lucide-react"
 import Link from "next/link"
 import {
   SidebarGroup,
@@ -22,11 +22,13 @@ export function NavMain({
 }) {
 
   let user = null;
-  const token = localStorage.getItem("token")
-  if (token) {
-    user = jwtDecode(token)
+
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token")
+    if (token) {
+      user = jwtDecode(token)
+    }
   }
-  console.log("user: ", user)
 
   return (
     <SidebarGroup>
@@ -43,6 +45,7 @@ export function NavMain({
             </Link>
           ))}
           {
+            // @ts-expect-error role might be undefined
             user?.role === "SUPERADMIN" && (
               <Link href={"/admin/admins"} >
                 <SidebarMenuItem >

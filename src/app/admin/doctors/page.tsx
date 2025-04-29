@@ -17,7 +17,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -40,11 +39,11 @@ export default function DoctorsPage() {
       const response = await axios.delete(`/api/admin/users/${id}`)
       return response.data
     },
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast.success("Doctor deleted successfully")
       queryClient.invalidateQueries({ queryKey: ['doctors'] })
     },
-    onError: (err: any) => {
+    onError: () => {
       toast.error("Failed to delete doctor")
     }
   })

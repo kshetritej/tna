@@ -15,9 +15,7 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -40,11 +38,11 @@ export default function DoctorsPage() {
       const response = await axios.delete(`/api/admin/posts/${id}`)
       return response.data
     },
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast.success("Post deleted successfully")
       queryClient.invalidateQueries({ queryKey: ['posts'] })
     },
-    onError: (err: any) => {
+    onError: () => {
       toast.error("Failed to delete post")
     }
   })

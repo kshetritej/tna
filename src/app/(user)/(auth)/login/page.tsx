@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
