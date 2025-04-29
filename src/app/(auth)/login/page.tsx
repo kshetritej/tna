@@ -23,7 +23,6 @@ type FormValues = z.infer<typeof formSchema>
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -37,7 +36,7 @@ export default function LoginPage() {
   })
 
   const login = useMutation({
-    mutationFn: async (data:FormValues) => await axios.post("/api/login", data),
+    mutationFn: async (data: FormValues) => await axios.post("/api/login", data),
     mutationKey: ["login"],
     onSuccess: (data) => {
       localStorage.setItem("token", data.data.token)
