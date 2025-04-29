@@ -9,6 +9,10 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { usePathname } from "next/navigation";
 
 const queryClient = new QueryClient()
 
@@ -19,15 +23,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const location = usePathname()
   return (
     <html>
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-            <div className="flex flex-col min-h-screen">
-              <main className="mx-auto">{children}</main>
+            <SidebarProvider>
+              <AppSidebar variant="inset" />
+              <SidebarInset>
+                <div>
+                  <SiteHeader headerTitle={location.split('/').pop() || ''} />
+                  <main className="mx-auto w-full">{children}</main>
               <Toaster />
             </div>
+              </SidebarInset>
+            </SidebarProvider>
           </ThemeProvider>
         </QueryClientProvider>
       </body>

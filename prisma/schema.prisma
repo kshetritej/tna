@@ -50,7 +50,7 @@ model Post {
   title     String
   content   String?
   authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
+  author    User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
   comments Comment[]
 
   createdAt DateTime @default(now())
@@ -61,9 +61,9 @@ model Comment {
   id Int @id @default(autoincrement())
   content String
   authorId Int
-  author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   postId Int
-  post Post @relation(fields: [postId], references: [id])
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
@@ -79,9 +79,9 @@ model Appointment {
   contact String?
 
   patientId Int
-  patient User @relation("PatientAppointments", fields: [patientId], references: [id])
+  patient User @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
   doctorId Int
-  doctor User @relation("DoctorAppointments", fields: [doctorId], references: [id])
+  doctor User @relation("DoctorAppointments", fields: [doctorId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())

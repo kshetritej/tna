@@ -1,0 +1,3 @@
+{
+  "/api/(auth)/signup/doctor/route": "app/api/(auth)/signup/doctor/route.js"
+}

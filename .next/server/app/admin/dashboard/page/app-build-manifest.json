@@ -3,8 +3,9 @@
     "/admin/dashboard/page": [
       "static/chunks/32a9e_next_dist_8bfaaeec._.js",
       "static/chunks/32a9e_next_dist_client_components_not-found-error_e0c3d4b4.js",
-      "static/chunks/node_modules__pnpm_24c97c04._.js",
-      "static/chunks/[root-of-the-server]__ba91f3a5._.js",
+      "static/chunks/[root-of-the-server]__eaed5cbe._.js",
+      "static/chunks/9c939_tailwind-merge_dist_bundle-mjs_mjs_5274cb0a._.js",
+      "static/chunks/node_modules__pnpm_fe2e2066._.js",
       "static/chunks/[root-of-the-server]__9a168d68._.css",
       "static/chunks/src_app_admin_layout_tsx_e0c3d4b4._.js",
       "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_60b49885._.js",

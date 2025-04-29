@@ -1,7 +1,19 @@
 {
+  "/(auth)/signup/page": "app/(auth)/signup/page.js",
+  "/(user)/(auth)/signup/doctor/page": "app/(user)/(auth)/signup/doctor/page.js",
+  "/(user)/(auth)/signup/page": "app/(user)/(auth)/signup/page.js",
+  "/(user)/page": "app/(user)/page.js",
+  "/(user)/profile/page": "app/(user)/profile/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/admin/dashboard/page": "app/admin/dashboard/page.js",
-  "/admin/login/page": "app/admin/login/page.js",
-  "/api/(auth)/admin/login/route": "app/api/(auth)/admin/login/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/admin/doctors/page": "app/admin/doctors/page.js",
+  "/admin/posts/page": "app/admin/posts/page.js",
+  "/admin/users/page": "app/admin/users/page.js",
+  "/api/(auth)/signup/doctor/route": "app/api/(auth)/signup/doctor/route.js",
+  "/api/admin/posts/route": "app/api/admin/posts/route.js",
+  "/api/admin/users/[id]/route": "app/api/admin/users/[id]/route.js",
+  "/api/admin/users/doctors/route": "app/api/admin/users/doctors/route.js",
+  "/api/admin/users/patients/route": "app/api/admin/users/patients/route.js",
+  "/api/appointment/[doctorId]/route": "app/api/appointment/[doctorId]/route.js",
+  "/api/profile/[id]/route": "app/api/profile/[id]/route.js"
 }
