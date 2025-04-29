@@ -1,6 +1,6 @@
 "use client"
 
-import {  type LucideIcon } from "lucide-react"
+import { type LucideIcon, UserCog, UsersIcon } from "lucide-react"
 import Link from "next/link"
 import {
   SidebarGroup,
@@ -9,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { jwtDecode } from "jwt-decode"
 
 export function NavMain({
   items,
@@ -19,6 +20,14 @@ export function NavMain({
     icon?: LucideIcon
   }[]
 }) {
+
+  let user = null;
+  const token = localStorage.getItem("token")
+  if (token) {
+    user = jwtDecode(token)
+  }
+  console.log("user: ", user)
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -33,6 +42,17 @@ export function NavMain({
             </SidebarMenuItem>
             </Link>
           ))}
+          {
+            user?.role === "SUPERADMIN" && (
+              <Link href={"/admin/admins"} >
+                <SidebarMenuItem >
+                  <SidebarMenuButton tooltip={"Manage Admins"} size={'lg'}>
+                    <UserCog />
+                    <span>Manage Admins</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </Link>)
+          }
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>

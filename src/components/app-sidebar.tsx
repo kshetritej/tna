@@ -2,24 +2,12 @@
 
 import * as React from "react"
 import {
-  ArrowUpCircleIcon,
-  BarChartIcon,
-  CameraIcon,
-  ClipboardListIcon,
-  DatabaseIcon,
-  FileCodeIcon,
-  FileIcon,
-  FileTextIcon,
-  FolderIcon,
-  HelpCircleIcon,
   LayoutDashboardIcon,
   ListIcon,
-  SearchIcon,
-  SettingsIcon,
   Stethoscope,
   UsersIcon,
 } from "lucide-react"
-
+import Link from "next/link"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
 import {
@@ -33,10 +21,15 @@ import {
 } from "@/components/ui/sidebar"
 import { jwtDecode } from "jwt-decode"
 
+let user = null;
+if (localStorage.getItem("token")) {
+  user = jwtDecode(localStorage.getItem("token") || "")
+}
+console.log("user: ", user)
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: user?.name || "Admin",
+    email: user?.email || "admin@gmail.com",
     avatar: "/avatars/shadcn.jpg",
   },
 
@@ -73,12 +66,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
+              size="lg"
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="/">
-                <div className="size-10 rounded-2xl p-4 bg-primary"></div>
-                <span className="text-base font-semibold">TNA.</span>
-              </a>
+              <Link href="/" className="flex items-center gap-2">
+                <div className="bg-primary rounded-md w-8 h-8 flex items-center justify-center">
+                </div>
+                <span className="font-bold text-2xl">tna</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
