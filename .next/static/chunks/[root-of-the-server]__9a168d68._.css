@@ -3554,6 +3554,10 @@
     color: var(--accent-foreground);
   }
 
+  .data-\[state\=open\]\:text-muted-foreground[data-state="open"] {
+    color: var(--muted-foreground);
+  }
+
   .data-\[state\=open\]\:text-sidebar-accent-foreground[data-state="open"] {
     color: var(--sidebar-accent-foreground);
   }
@@ -3634,6 +3638,12 @@
   @media (width >= 40rem) {
     .sm\:flex {
       display: flex;
+    }
+  }
+
+  @media (width >= 40rem) {
+    .sm\:max-w-\[425px\] {
+      max-width: 425px;
     }
   }
 

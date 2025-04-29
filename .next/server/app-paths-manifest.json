@@ -1,11 +1,14 @@
 {
   "/(user)/page": "app/(user)/page.js",
-  "/(user)/profile/page": "app/(user)/profile/page.js",
   "/(user)/tna-admin/page": "app/(user)/tna-admin/page.js",
   "/_not-found/page": "app/_not-found/page.js",
+  "/admin/admins/page": "app/admin/admins/page.js",
   "/admin/dashboard/page": "app/admin/dashboard/page.js",
+  "/admin/doctors/page": "app/admin/doctors/page.js",
+  "/admin/posts/page": "app/admin/posts/page.js",
+  "/api/admin/admins/[id]/route": "app/api/admin/admins/[id]/route.js",
+  "/api/admin/admins/route": "app/api/admin/admins/route.js",
+  "/api/admin/create-admin/route": "app/api/admin/create-admin/route.js",
   "/api/admin/login/route": "app/api/admin/login/route.js",
-  "/api/appointment/[doctorId]/route": "app/api/appointment/[doctorId]/route.js",
-  "/api/dashboard/stats/route": "app/api/dashboard/stats/route.js",
-  "/api/profile/[id]/route": "app/api/profile/[id]/route.js"
+  "/api/dashboard/stats/route": "app/api/dashboard/stats/route.js"
 }
