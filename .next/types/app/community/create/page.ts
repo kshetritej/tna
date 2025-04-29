@@ -1,8 +1,8 @@
 // File: /home/tj/Documents/aws/mental/src/app/community/create/page.tsx
-import * as entry from '../../../../../src/app/community/create/page.js'
+import * as entry from '../../../../../src/app/(user)/community/create/page.jsx'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../../src/app/community/create/page.js')
+type TEntry = typeof import('../../../../../src/app/(user)/community/create/page.jsx')
 
 type SegmentParams<T extends Object = any> = T extends Record<string, any>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }

@@ -379,6 +379,10 @@
     container: card-header / inline-size;
   }
 
+  .\@container\/main {
+    container: main / inline-size;
+  }
+
   .pointer-events-none {
     pointer-events: none;
   }
@@ -2708,6 +2712,18 @@
   }
 
   @media (width >= 48rem) {
+    .md\:gap-6 {
+      gap: calc(var(--spacing) * 6);
+    }
+  }
+
+  @media (width >= 48rem) {
+    .md\:py-6 {
+      padding-block: calc(var(--spacing) * 6);
+    }
+  }
+
+  @media (width >= 48rem) {
     .md\:py-16 {
       padding-block: calc(var(--spacing) * 16);
     }
@@ -2730,6 +2746,12 @@
   @media (width >= 64rem) {
     .lg\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (width >= 64rem) {
+    .lg\:px-6 {
+      padding-inline: calc(var(--spacing) * 6);
     }
   }
 

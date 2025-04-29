@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///home/tj/Documents/aws/mental/src/app/admin/layout.tsx"],"sourcesContent":["\"use client\";\n\nimport { jwtDecode } from \"jwt-decode\"\nimport { redirect } from \"next/navigation\"\n\nexport default function AdminLayout({ children }: { children: React.ReactNode }) {\n\n  if (typeof window !== \"undefined\") {\n    const token = localStorage.getItem(\"token\")\n    const user = jwtDecode(token as string)\n\n    //@ts-expect-error role may not exist\n    if (user?.role !== \"ADMIN\") {\n      redirect(\"/\")\n    }\n  }\n  return (\n    <div>\n      {children}\n    </div>\n  )\n}"],"names":[],"mappings":";;;;AAEA;AACA;AAHA;;;;AAKe,SAAS,YAAY,EAAE,QAAQ,EAAiC;IAE7E,uCAAmC;;IAQnC;IACA,qBACE,6WAAC;kBACE;;;;;;AAGP","debugId":null}},
+    {"offset": {"line": 34, "column": 0}, "map": {"version":3,"sources":["file:///home/tj/Documents/aws/mental/node_modules/.pnpm/next%4015.3.1_react-dom%4019.1.0_react%4019.1.0__react%4019.1.0/node_modules/next/navigation.js"],"sourcesContent":["module.exports = require('./dist/client/components/navigation')\n"],"names":[],"mappings":"AAAA,OAAO,OAAO","ignoreList":[0],"debugId":null}}]
+}

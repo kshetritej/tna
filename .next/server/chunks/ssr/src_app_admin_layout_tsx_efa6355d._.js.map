@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///home/tj/Documents/aws/mental/src/app/admin/layout.tsx"],"sourcesContent":["\"use client\";\n\nimport { jwtDecode } from \"jwt-decode\"\nimport { redirect } from \"next/navigation\"\n\nexport default function AdminLayout({ children }: { children: React.ReactNode }) {\n\n  // if (typeof window !== \"undefined\") {\n  //   const token = localStorage.getItem(\"token\")\n  //   const user = jwtDecode(token as string)\n\n  //   //@ts-expect-error role may not exist\n  //   if (user?.role !== \"ADMIN\") {\n  //     redirect(\"/\")\n  //   }\n  // }\n  return (\n    <div>\n      <h1>Admin Layout</h1>\n      {children}\n    </div>\n  )\n}"],"names":[],"mappings":";;;;AAAA;;AAKe,SAAS,YAAY,EAAE,QAAQ,EAAiC;IAE7E,uCAAuC;IACvC,gDAAgD;IAChD,4CAA4C;IAE5C,0CAA0C;IAC1C,kCAAkC;IAClC,oBAAoB;IACpB,MAAM;IACN,IAAI;IACJ,qBACE,6WAAC;;0BACC,6WAAC;0BAAG;;;;;;YACH;;;;;;;AAGP","debugId":null}}]
+}
