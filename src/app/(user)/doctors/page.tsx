@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/pagination"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import { jwtDecode } from "jwt-decode";
 
 
 export default function DoctorsPage() {
@@ -27,6 +28,14 @@ export default function DoctorsPage() {
       return response.data
     },
   })
+
+  let user = null;
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token")
+    if (token) {
+      user = jwtDecode(token)
+    }
+  }
 
   if (isLoading) return <div>Loading...</div>
   return (
@@ -84,17 +93,17 @@ export default function DoctorsPage() {
                   </div>
 
                   {/* Stats */}
-                  <div className="flex justify-between w-full mt-2">
-                    <div className="flex items-center">
+                  <div className="flex gap-2 justify-between w-full mt-2">
+                    <div className="flex items-center p-1 bg-muted rounded-md">
                       <Clock className="h-4 w-4 text-green-600 mr-2" />
                       <div>
                         <p className="text-sm font-medium">Experience</p>
                         <p className="text-sm">{doctor.experience}+ years</p>
                       </div>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center p-1 bg-muted rounded-md">
                       <Phone className="h-4 w-4 text-green-600 mr-2" />
-                      <div>
+                      <div className="flex flex-col gap-1 items-center">
                         <p className="text-sm font-medium">Quick Contact</p>
                         <p className="text-sm">{doctor.phone}</p>
                       </div>
@@ -103,7 +112,7 @@ export default function DoctorsPage() {
                 </div>
               </CardContent>
               <CardFooter className="p-4 pt-0 flex gap-2">
-                <Button className="flex-1" asChild>
+                <Button className="flex-1" asChild disabled={!user}>
                   <Link href={`/appointment?doctor=${doctor.id}`}>Book Session</Link>
                 </Button>
               </CardFooter>
