@@ -13,7 +13,12 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { redirect, usePathname } from "next/navigation";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+import { useEffect } from "react";
+
+interface JwtPayloadWithRole extends JwtPayload {
+  role?: "SUPERADMIN" | "ADMIN" | "DOCTOR" | "PATIENT";
+}
 
 const queryClient = new QueryClient()
 
@@ -25,15 +30,18 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const location = usePathname()
-  let user = null;
+  let user: JwtPayloadWithRole | null = null;
   const token = localStorage.getItem("token")
   if (token) {
-    user = jwtDecode(token)
+    user = jwtDecode(token) as JwtPayloadWithRole
   }
 
-  if (user?.role !== "SUPERADMIN" || user?.role !== "ADMIN") {
-    redirect("/")
-  }
+  useEffect(() => {
+    if (!user?.role || (user?.role !== "SUPERADMIN" && user?.role !== "ADMIN")) {
+      console.log("user role", user?.role)
+      redirect("/")
+    }
+  }, [user])
   return (
     <html>
       <body className={inter.className}>
@@ -45,8 +53,8 @@ export default function RootLayout({
                 <div>
                   <SiteHeader headerTitle={location.split('/').pop() || ''} />
                   <main className="mx-auto w-full">{children}</main>
-              <Toaster />
-            </div>
+                  <Toaster />
+                </div>
               </SidebarInset>
             </SidebarProvider>
           </ThemeProvider>

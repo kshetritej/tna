@@ -1,11 +1,7 @@
 "use client"
 
 import {
-  BellIcon,
-  CreditCardIcon,
   LogOutIcon,
-  MoreVerticalIcon,
-  UserCircleIcon,
 } from "lucide-react"
 
 import {
@@ -14,20 +10,12 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useRouter } from "next/navigation"
 
 export function NavUser({
   user,
@@ -38,12 +26,18 @@ export function NavUser({
     avatar: string
   }
 }) {
-  const { isMobile } = useSidebar()
+  const router = useRouter()
+  const logOut = () => {
+    localStorage.removeItem("token")
+    router.push("/")
+  }
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton size={'lg'} className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground border border-red-500 hover:bg-red-500 p-4 hover:text-white">
+        <SidebarMenuButton
+        onClick={() => logOut()}
+          size={'lg'} className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground border border-red-500 hover:bg-red-500 p-4 hover:text-white">
           <span>Logout</span> <LogOutIcon className="ml-auto size-4" />
         </SidebarMenuButton>
       </SidebarMenuItem>

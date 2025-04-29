@@ -1,12 +1,11 @@
 {
-  "/(user)/(auth)/login/page": "app/(user)/(auth)/login/page.js",
   "/(user)/page": "app/(user)/page.js",
+  "/(user)/profile/page": "app/(user)/profile/page.js",
   "/(user)/tna-admin/page": "app/(user)/tna-admin/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/admin/dashboard/page": "app/admin/dashboard/page.js",
-  "/admin/login/page": "app/admin/login/page.js",
-  "/admin/posts/page": "app/admin/posts/page.js",
-  "/api/admin/posts/route": "app/api/admin/posts/route.js",
+  "/api/admin/login/route": "app/api/admin/login/route.js",
+  "/api/appointment/[doctorId]/route": "app/api/appointment/[doctorId]/route.js",
   "/api/dashboard/stats/route": "app/api/dashboard/stats/route.js",
-  "/tna-admin/page": "app/tna-admin/page.js"
+  "/api/profile/[id]/route": "app/api/profile/[id]/route.js"
 }

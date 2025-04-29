@@ -34,12 +34,13 @@ export default function AdminLoginPage() {
       return response.json()
     },
     onSuccess: (data) => {
+      console.log("login data", data)
       localStorage.setItem("token", data.token)
       toast.success("Login successful")
       router.push("/admin/dashboard")
     },
-    onError: (error: any) => {
-      toast.error(error.message || "Something went wrong")
+    onError: () => {
+      toast.error("Invalid email or password")
     }
   })
 
