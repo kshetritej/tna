@@ -113,7 +113,7 @@ export default function DoctorsPage() {
               </CardContent>
               <CardFooter className="p-4 pt-0 flex gap-2">
                 <Button className="flex-1" asChild disabled={!user}>
-                  <Link href={`/appointment?doctor=${doctor.id}`}>Book Session</Link>
+                  <Link href={user ? `/appointment?doctor=${doctor.id}` : "/login"}>Book Session</Link>
                 </Button>
               </CardFooter>
             </Card>
