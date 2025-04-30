@@ -70,7 +70,7 @@ export default function DoctorsPage() {
             <TableRow key={post.id} className="hover:bg-secondary">
               <TableCell className="font-medium">{post.id.toString().slice(0, 6)}</TableCell>
               <TableCell>{post.title}</TableCell>
-              <TableCell>{post.content}</TableCell>
+              <TableCell className="max-w-2xl">{post.content.substring(0, 30) + "..."}</TableCell>
               <TableCell>{post.author.name}</TableCell>
               <TableCell>{post.author.email}</TableCell>
               <TableCell>{post.createdAt.toLocaleString()}</TableCell>

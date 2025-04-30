@@ -24,6 +24,7 @@ import {
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
 
 export default function DoctorsPage() {
   const { data: doctors, isLoading, error } = useQuery({
@@ -48,8 +49,22 @@ export default function DoctorsPage() {
     }
   })
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
+  const verifyDoctor = useMutation({
+    mutationFn: async (id: string) => {
+      const response = await axios.patch(`/api/admin/users/doctors/${id}`)
+      return response.data
+    },
+    onSuccess: () => {
+      toast.success("Doctor verified successfully")
+      queryClient.invalidateQueries({ queryKey: ['doctors'] })
+    },
+    onError: () => {
+      toast.error("Failed to verify doctor")
+    }
+  })
+
+  if (isLoading) return <div className="flex justify-center items-center h-screen">Loading...</div>
+  if (error) return <div className="flex justify-center items-center h-screen">Error: {error.message}</div>
 
   return (
     <div className="p-4">
@@ -77,7 +92,7 @@ export default function DoctorsPage() {
               <TableCell>{doctor.experience}</TableCell>
               <TableCell>{doctor.address}</TableCell>
               <TableCell className="flex gap-2">
-                <Button variant="outline">Verify Doctor</Button>
+              {doctor.isVerified ? <Badge variant="outline">Verified</Badge> : <Button variant="outline" onClick={() => verifyDoctor.mutate(doctor.id)}>Verify Doctor</Button>}
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button variant="destructive">
