@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "node prisma/seed.js",
-    "deploy":"pnpm prisma generate && pnpm prisma migrate deploy && pnpm run seed && pnpm build"
+    "deploy":"pnpm prisma generate && pnpm prisma migrate deploy && pnpm run seed && pnpm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
